@@ -10,6 +10,7 @@ class GetRandomCocktailReceipe {
   GetRandomCocktailReceipe(this.repo);
 
   Future<Either<Failure, ReceipeCocktail>> execute() async {
+    print("inside execute function");
     return await repo.getRandomCocktailReceipe();
   }
 }

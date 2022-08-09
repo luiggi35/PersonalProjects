@@ -13,10 +13,13 @@ class ReceipeCocktailRepositoryImpl implements ReceipeCocktailRepository {
 
   @override
   Future<Either<Failure, ReceipeCocktail>> getRandomCocktailReceipe() async {
+    print("iniside functionInDataSourceRepository");
     try {
       final remoteReceipe = await remoteDataSource.getRandomCocktailReceipe();
+      print("get recette");
       return Right(remoteReceipe);
     } on ServerException {
+      print("failure for get receipe");
       return Left(ServerFailure());
     }
   }

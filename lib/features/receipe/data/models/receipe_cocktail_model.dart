@@ -3,8 +3,6 @@ import 'dart:convert';
 import '../../domain/entities/receipe_cocktail.dart';
 
 class ReceipeCocktailModel extends ReceipeCocktail {
-  
-
   ReceipeCocktailModel(
       {required String title,
       required String instruction,
@@ -19,30 +17,66 @@ class ReceipeCocktailModel extends ReceipeCocktail {
             listMeasure: listMeasure);
 
   factory ReceipeCocktailModel.fromJson(Map<String, dynamic> json) {
-    List<String> lIngr = [];
-  List<String> lMeas = [];
-    String ingredient;
-    for (int i = 1; i <= 15; i++) {
-      ingredient = json['strIngredient$i'];
-      if (ingredient != null) {
-        lIngr.add(ingredient);
+    void displayList(List l) {
+      for (int i = 0; i < l.length; i++) {
+        print(l[i]);
       }
     }
 
-    String measure;
-    for (int i = 1; i <= 15; i++) {
-      measure = json['strMeasure$i'];
-      if (measure != null) {
-        lMeas.add(measure);
+    print("");
+    print("liste ingrédients");
+    //displayListString(listIngr);
+    print("");
+    print("liste mesures");
+    //displayListString(listMeas);
+
+    print("nom du cocktail");
+    print(json["drinks"][0]['strDrink']);
+    print(json["drinks"][0]['strInstructions']);
+    print(json["drinks"][0]['strInstructions']);
+    print(json["drinks"][0]['strDrinkThumb']);
+    /*List<String> lIngr = [];
+    List<String> lMeas = [];*/
+    List<String> listIngr = [];
+    String ingredient = "";
+    var j;
+    for (int i = 1; i < 16; i++) {
+      print("type de strNULL");
+      j = json["drinks"][0]['strIngredient$i'].runtimeType;
+      print(j);
+
+      if (j != Null) {
+        ingredient = json["drinks"][0]['strIngredient$i'];
+        listIngr.add(ingredient);
       }
     }
 
+    List<String> listMeas = [];
+    String measure = "";
+    var k;
+    for (int i = 1; i < 16; i++) {
+      print("type de strNULL");
+      k = json["drinks"][0]['strMeasure$i'].runtimeType;
+      print(k);
+
+      if (k != Null) {
+        measure = json["drinks"][0]['strMeasure$i'];
+        listMeas.add(measure);
+      }
+    }
+
+    print("");
+    print("liste ingrédients");
+    displayList(listIngr);
+    print("");
+    print("liste mesures");
+    displayList(listMeas);
     return ReceipeCocktailModel(
-      title: json['strDrink'],
-      instruction: json['strInstructions'],
-      urlImg: json['strDrinkThumb'],
-      listIngredient: lIngr,
-      listMeasure: lMeas,
+      title: json["drinks"][0]['strDrink'],
+      instruction: json["drinks"][0]['strInstructions'],
+      urlImg: json["drinks"][0]['strDrinkThumb'],
+      listIngredient: listIngr,
+      listMeasure: listMeas,
     );
   }
 
